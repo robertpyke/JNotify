@@ -28,7 +28,6 @@ import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
-import notificationsystem.Fader;
 
 public class NotificationPopup extends JDialog {
 

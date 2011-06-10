@@ -1,4 +1,4 @@
-package notificationsystem;
+package notificationsystem.notification;
 
 import com.sun.awt.AWTUtilities;
 import java.util.TimerTask;

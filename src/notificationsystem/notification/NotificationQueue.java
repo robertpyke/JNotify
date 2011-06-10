@@ -13,8 +13,6 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
-import java.util.List;
-import javax.management.Notification;
 import notificationsystem.notification.NotificationPopup;
 
 /**
