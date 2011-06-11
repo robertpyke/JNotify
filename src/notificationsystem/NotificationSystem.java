@@ -14,7 +14,7 @@ import notificationsystem.notification.NotificationQueue;
  * @author Robert Pyke
  */
 public class NotificationSystem {
-    public static final int LISTEN_PORT = 7070;
+    public static final int LISTEN_PORT = 43596;
     
     /**
      * @param args the command line arguments
