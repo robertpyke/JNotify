@@ -20,6 +20,8 @@ import notificationsystem.notification.NotificationQueue;
  */
 public class NotificationSystem {
     public static final int LISTEN_PORT = 43596;
+    public static final int EXIT_PORT_BIND_FAILED = 1;
+    public static final int EXIT_PORT_RECEIVER_FAILED_IO = 2;
     
     /**
      * @param args the command line arguments
@@ -35,7 +37,10 @@ public class NotificationSystem {
             
             NotificationQueue notificationQueue = new NotificationQueue(); 
 
-            DatagramSocket socket = new DatagramSocket(LISTEN_PORT);           
+            DatagramSocket socket = new DatagramSocket(LISTEN_PORT);
+            
+            System.out.println("Listening for notifications on UDP Port: " + LISTEN_PORT);
+           
             DatagramPacket packet = new DatagramPacket(new byte[512], 512);        
             
             final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();        
@@ -59,7 +64,7 @@ public class NotificationSystem {
             JOptionPane.showMessageDialog(null, "Failed to bind to listen socket on UDP port: " 
                     + LISTEN_PORT, "Fatal Error", JOptionPane.ERROR_MESSAGE);
             
-            System.exit(1);        
+            System.exit(EXIT_PORT_BIND_FAILED);        
         } catch (IOException ex) {
             Logger.getLogger(NotificationSystem.class.getName()).log(Level.SEVERE, 
                     "IO Error occurred while listening for notifications on UDP port: " + LISTEN_PORT, ex);
@@ -67,7 +72,7 @@ public class NotificationSystem {
             JOptionPane.showMessageDialog(null, "IO Error occurred while listening " +
                     "for notifications on UDP port: " + LISTEN_PORT, "Fatal Error", JOptionPane.ERROR_MESSAGE);
             
-            System.exit(2);
+            System.exit(EXIT_PORT_RECEIVER_FAILED_IO);
         }        
     }
 }
