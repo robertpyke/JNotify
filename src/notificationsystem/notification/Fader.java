@@ -2,7 +2,7 @@ package notificationsystem.notification;
 
 import com.sun.awt.AWTUtilities;
 import java.util.TimerTask;
-import javax.swing.JDialog;
+import javax.swing.JWindow;
 
 /**
  *
@@ -10,10 +10,10 @@ import javax.swing.JDialog;
  */
 public class Fader extends TimerTask {
 
-    private JDialog jDialog;
+    private JWindow jWindow;
 
-    public Fader(JDialog jDialog) {
-        this.jDialog = jDialog;
+    public Fader(JWindow jWindow) {
+        this.jWindow = jWindow;
     }
     
     // As Fader extends from Timer, it's the run() method which does the main job
@@ -21,10 +21,10 @@ public class Fader extends TimerTask {
     public void run() {
         // The opacity is reduced by 0.01f per step
         // If this value equals 0 (invisible), then dispose the JDialog
-        if (AWTUtilities.getWindowOpacity(jDialog) > 0.01f) {
-            AWTUtilities.setWindowOpacity(jDialog, AWTUtilities.getWindowOpacity(jDialog) - 0.01f);
+        if (AWTUtilities.getWindowOpacity(jWindow) > 0.005f) {
+            AWTUtilities.setWindowOpacity(jWindow, AWTUtilities.getWindowOpacity(jWindow) - 0.005f);
         } else {
-            jDialog.dispose();
+            jWindow.dispose();
         }
     }
 }

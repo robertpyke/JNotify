@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
+import javax.swing.JWindow;
 
 /**
  *
@@ -90,10 +91,12 @@ public class NotificationQueue extends LinkedList<NotificationPopup> {
         }
 
         NotificationPopup newNotification = new NotificationPopup(notificationHTML, x, y, true);
-
+        JWindow notificationWindow = new JWindow(newNotification);
+        
+        
         this.add(newNotification);
-        newNotification.show();
-
+        newNotification.setVisible(true);
+        
     }
 
     // Get the next X position for which there is no

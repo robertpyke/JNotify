@@ -23,19 +23,19 @@ import java.util.Timer;
 
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JEditorPane;
 import javax.swing.JPanel;
+import javax.swing.JWindow;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 
-public class NotificationPopup extends JDialog {
+public class NotificationPopup extends JWindow {
     
     private final LinearGradientPaint lpg;
     
     
     private final static long FADE_OUT_TIME = 10000;
-    private final static long FADE_OUT_INCREMENT = 20;
+    private final static long FADE_OUT_INCREMENT = 10;
     public final static int HEIGHT = 50;
     public final static int WIDTH = 300;
     private final boolean fade;
@@ -44,9 +44,8 @@ public class NotificationPopup extends JDialog {
         this.setFocusableWindowState(false);
         final NotificationPopup f = this;
         fade = in_fade;
-        
         Container con = this.getContentPane();
-        setUndecorated(true);
+        //setUndecorated(true);
         setSize(WIDTH, HEIGHT);
         
         con.setLayout(new GridBagLayout());
@@ -139,7 +138,6 @@ public class NotificationPopup extends JDialog {
 
             //And then we launch the fade-out, waiting 500ms before starting
             //Then we gradually fade out every 5ms
-            // timer.schedule(new Fader(this), 500, 5);
             timer.schedule(new Fader(this), FADE_OUT_TIME, FADE_OUT_INCREMENT);
         }
     
