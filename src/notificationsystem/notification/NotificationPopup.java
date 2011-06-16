@@ -30,7 +30,7 @@ import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 
 public class NotificationPopup extends JDialog {
-
+    
     private final LinearGradientPaint lpg;
     
     
@@ -41,6 +41,7 @@ public class NotificationPopup extends JDialog {
     private final boolean fade;
     
     public NotificationPopup(String noteText, int x, int y, boolean in_fade) throws IOException {
+        this.setFocusableWindowState(false);
         final NotificationPopup f = this;
         fade = in_fade;
         
@@ -132,8 +133,7 @@ public class NotificationPopup extends JDialog {
 
     @Override
     public void show() {
-        AWTUtilities.setWindowOpacity(this, 0.95f);
-        
+        AWTUtilities.setWindowOpacity(this, 0.95f);        
         if (fade) {
             Timer timer = new Timer();
 
