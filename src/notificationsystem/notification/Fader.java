@@ -24,7 +24,8 @@ public class Fader extends TimerTask {
         if (AWTUtilities.getWindowOpacity(jWindow) > 0.005f) {
             AWTUtilities.setWindowOpacity(jWindow, AWTUtilities.getWindowOpacity(jWindow) - 0.005f);
         } else {
-            jWindow.dispose();
+            jWindow.setVisible(false);
+            cancel();
         }
     }
 }
