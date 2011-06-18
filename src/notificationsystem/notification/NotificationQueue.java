@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
-import javax.swing.JWindow;
 
 /**
  *
@@ -48,7 +47,7 @@ public class NotificationQueue extends LinkedList<NotificationPopup> {
         final int screenBottomEdge = scnMax.bottom;
         final int screenTopEdge = scnMax.top;
         final int screenLeftEdge = scnMax.left;
-        final int screenRightEdge = scnMax.left;
+        final int screenRightEdge = scnMax.right;
 
         int x = 0;
         int y = 0;
@@ -63,7 +62,7 @@ public class NotificationQueue extends LinkedList<NotificationPopup> {
         // If this is the first notification, use the right size of the screen as the X position
         if (lastX == null) {
             x = maxX;
-            // Else, use the X position of the most recent notification.
+        // Else, use the X position of the most recent notification.
         } else {
             x = lastX;
         }
@@ -81,51 +80,20 @@ public class NotificationQueue extends LinkedList<NotificationPopup> {
         // Move left of the last notification position.
         if (y > maxY) {
             y = screenTopEdge;
-            x = getFreeColumnX(maxX);
+            x = lastX - NotificationPopup.WIDTH;
         }
 
         // If we have gone all the way left,
         // go back to the right.
-        if (x < screenLeftEdge) {
+        if ( x < ( ( screenLeftEdge + maxX ) / 2 ) ) {
             x = maxX;
         }
 
-        NotificationPopup newNotification = new NotificationPopup(notificationHTML, x, y, true);
-        JWindow notificationWindow = new JWindow(newNotification);
-        
+        NotificationPopup newNotification = new NotificationPopup(notificationHTML, x, y, true);        
         
         this.add(newNotification);
         newNotification.setVisible(true);
         
-    }
-
-    // Get the next X position for which there is no
-    // current NotificationPopups
-    // Moves right to left.
-    // Takes maxX (the right-most x position)
-    private Integer getFreeColumnX(Integer maxX) {
-        Integer returnX = null;
-        Integer candidateColumnX = maxX;
-
-        // Keep going till we find a vlid X
-        while (returnX == null) {
-            // Track where or not the column is taken.
-            boolean columnTaken = false;
-            for (NotificationPopup n : this) {
-                if (candidateColumnX == n.getX()) {
-                    columnTaken = true;
-                    break;
-                }
-            }
-            // If the column isn't taken
-            if (!columnTaken) {
-                // Return this candidate
-                returnX = candidateColumnX;
-            } else {
-                candidateColumnX = (candidateColumnX - NOTIFICATION_MARGIN_PIXELS_LEFT_RIGHT - NotificationPopup.WIDTH);
-            }
-        }
-        return returnX;
     }
 
     public void hideAllNotifications() {

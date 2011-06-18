@@ -8,20 +8,21 @@ import com.sun.awt.AWTUtilities;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Desktop;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.LinearGradientPaint;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Timer;
+import javax.swing.ImageIcon;
 
-import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
 import javax.swing.JPanel;
@@ -50,16 +51,8 @@ public class NotificationPopup extends JWindow {
         
         con.setLayout(new GridBagLayout());
 
-        // size of the screen
-        final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
-        // height of the task bar
-        final Insets scnMax = Toolkit.getDefaultToolkit().getScreenInsets(
-                getGraphicsConfiguration());
-        final int taskBarSize = scnMax.bottom;
-
-        
         setLocation(x, y);
+        
         // background paint
         lpg = new LinearGradientPaint(0, 0, 0, getHeight() / 2, new float[]{0f,
                     0.3f, 1f}, new Color[]{new Color(0.8f, 0.8f, 1f),
@@ -82,7 +75,6 @@ public class NotificationPopup extends JWindow {
         constraints.fill = GridBagConstraints.BOTH;
         //constraints.anchor = GridBagConstraints.FIRST_LINE_START;
         //constraints.anchor = GridBagConstraints.NORTH;
-
 
         final JEditorPane l = new JEditorPane("text/html", noteText);
         l.setEditable(false);
@@ -109,25 +101,25 @@ public class NotificationPopup extends JWindow {
         constraints.gridx++;
         constraints.weightx = 0f;
         constraints.weighty = 0f;
-        constraints.fill = GridBagConstraints.BOTH;
-        //constraints.insets = new Insets(5, 5, 5, 5);
-        constraints.anchor = GridBagConstraints.CENTER;
+        
+        constraints.fill = GridBagConstraints.NONE;
+        constraints.anchor = GridBagConstraints.NORTHEAST;        
 
-
-        final JButton b = new JButton(new AbstractAction("x") {
-
-            @Override
+        // constraints.fill = GridBagConstraints.BOTH;
+        // constraints.anchor = GridBagConstraints.CENTER;
+           
+        final JButton b = new JButton(new ImageIcon("toolbarButtonGraphics/navigation/Down16.gif"));
+        b.addActionListener(new ActionListener() {
+           @Override
             public void actionPerformed(final ActionEvent e) {
                 f.dispose();
             }
         });
-
+        
         b.setOpaque(false);
         b.setFocusable(false);
-
         c.add(b, constraints);
-        this.setAlwaysOnTop(true);
-        
+        this.setAlwaysOnTop(true);        
     }
 
     @Override
