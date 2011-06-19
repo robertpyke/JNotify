@@ -12,10 +12,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Image;
 import java.awt.Insets;
 import java.awt.LinearGradientPaint;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -108,7 +106,7 @@ public class NotificationPopup extends JWindow {
         // constraints.fill = GridBagConstraints.BOTH;
         // constraints.anchor = GridBagConstraints.CENTER;
            
-        final JButton b = new JButton(new ImageIcon("toolbarButtonGraphics/navigation/Down16.gif"));
+        final JButton b = new JButton(new ImageIcon("toolbarButtonGraphics/navigation/Close16.gif"));
         b.addActionListener(new ActionListener() {
            @Override
             public void actionPerformed(final ActionEvent e) {
