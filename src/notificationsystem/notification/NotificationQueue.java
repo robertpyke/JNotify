@@ -76,7 +76,7 @@ public class NotificationQueue extends LinkedList<NotificationPopup> {
         }
 
         // If y is too large...
-        // rap around, and start putting notifications at the top
+        // wrap around, and start putting notifications at the top
         // Move left of the last notification position.
         if (y > maxY) {
             y = screenTopEdge;
